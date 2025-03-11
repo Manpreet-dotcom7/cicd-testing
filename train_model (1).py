@@ -1,4 +1,4 @@
-#import libraries
+[5:45 PM, 3/11/2025] Vasu: #import libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,7 +11,29 @@ from sklearn.metrics import confusion_matrix, precision_score, f1_score, recall_
 sns.set(style='white')
 
 # Load Data
-dataset = pd.read_csv(r'C:\Users\harpa\vs_code_project\CI,CD\iris.csv')
+dataset = pd.read_csv("iris.csv")
+
+# Feature names (Ensure no extra spaces or parentheses)
+dataset.columns = [colname.strip(' (cm)').replace(" ", "_") for colname in dataset.columns.tolist()]
+features_names = dataset.columns.tolist()[:4]
+
+# Feature Engineering
+dataset['sepal_length_width_ratio'] = dataset['sepal_length'] / dataset['sepal_width']
+dataset['petal…
+[6:18 PM, 3/11/2025] Vasu: #import libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import itertools
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, precision_score, f1_score, recall_score
+sns.set(style='white')
+
+# Load Data
+dataset = pd.read_csv("iris.csv")
 
 # Feature names (Ensure no extra spaces or parentheses)
 dataset.columns = [colname.strip(' (cm)').replace(" ", "_") for colname in dataset.columns.tolist()]
@@ -22,7 +44,7 @@ dataset['sepal_length_width_ratio'] = dataset['sepal_length'] / dataset['sepal_w
 dataset['petal_length_width_ratio'] = dataset['petal_length'] / dataset['petal_width']
 
 # Select Features (Correct the duplicate column issue)
-dataset = dataset[['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 
+dataset = dataset[['sepal_length', 'sepal_width', 'petal_length', 'petal_width',
                    'sepal_length_width_ratio', 'petal_length_width_ratio', 'target']]
 
 # Split Data
